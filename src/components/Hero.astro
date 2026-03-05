@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import heroImage from "../assets/images/unas-manicura-nude-1.jpeg";
 interface Props {
   lang?: "es" | "en";
 }
@@ -9,14 +11,18 @@ const phoneNumber = "34687432500";
 
 const i18n = {
   es: {
-    title: "Despierta tu mejor versión en mi espacio diseñado para ti",
+    titlePart1: "Despierta tu mejor",
+    titleHighlight: "versión",
+    titlePart2: "en mi espacio diseñado para ti",
     subtitle:
       "Olvídate del estrés diario en mi refugio de estética en Patraix (Valencia). Déjate mimar por mí y luce unas manos, mirada y piel impecables durante semanas.",
     cta: "Reserva tu momento",
     waMessage: "Hola, estoy interesada en el servicio de...",
   },
   en: {
-    title: "Awaken your best version in my space designed for you",
+    titlePart1: "Awaken your best",
+    titleHighlight: "version",
+    titlePart2: "in my space designed for you",
     subtitle:
       "Forget daily stress in my aesthetic refuge in Patraix (Valencia). Let yourself be pampered by me and show off flawless hands, eyes and skin for weeks.",
     cta: "Book your moment",
@@ -30,29 +36,57 @@ const waLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 ---
 
 <section
-  class="bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-white via-nude-50 to-nude-100 py-20 px-6 text-center lg:py-32 flex flex-col items-center justify-center w-full"
+  class="bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-white via-nude-50 to-nude-100 py-16 px-6 lg:py-24 flex flex-col items-center justify-center w-full min-h-[75vh]"
 >
-  <div class="max-w-3xl mx-auto flex flex-col items-center">
-    <h1
-      class="text-4xl lg:text-5xl font-bold text-zinc-800 mb-6 leading-tight tracking-tight animate-fade-in-up"
-      style="animation-delay: 0.1s;"
+  <div
+    class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+  >
+    <!-- Left Column: Text content -->
+    <div class="flex flex-col items-start text-left">
+      <h1
+        class="text-5xl lg:text-6xl xl:text-7xl font-bold text-zinc-800 mb-6 leading-[1.1] tracking-tight animate-fade-in-up font-serif"
+        style="animation-delay: 0.1s;"
+      >
+        {t.titlePart1}
+        <span class="italic text-pink-500 font-light">{t.titleHighlight}</span
+        ><br />
+        <span class="text-4xl lg:text-5xl xl:text-6xl block mt-2"
+          >{t.titlePart2}</span
+        >
+      </h1>
+
+      <p
+        class="text-lg lg:text-xl text-zinc-600 mb-10 max-w-lg animate-fade-in-up leading-relaxed"
+        style="animation-delay: 0.3s;"
+      >
+        {t.subtitle}
+      </p>
+
+      <a
+        href={waLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block bg-pastel-pink-dark text-gray-800 font-semibold px-10 py-4 rounded-full hover:bg-pink-300 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-pink-200/60 animate-fade-in-up text-lg"
+        style="animation-delay: 0.5s;"
+      >
+        {t.cta}
+      </a>
+    </div>
+
+    <!-- Right Column: Hero Image -->
+    <div
+      class="relative w-full h-full min-h-[400px] lg:min-h-[600px] animate-fade-in-up"
+      style="animation-delay: 0.4s;"
     >
-      {t.title}
-    </h1>
-    <p
-      class="text-lg lg:text-xl text-zinc-600 mb-10 max-w-2xl animate-fade-in-up"
-      style="animation-delay: 0.3s;"
-    >
-      {t.subtitle}
-    </p>
-    <a
-      href={waLink}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-block bg-pastel-pink-dark text-gray-800 font-semibold px-8 py-3 rounded-full hover:bg-pink-300 mb-4 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-pink-200/60 animate-fade-in-up"
-      style="animation-delay: 0.5s;"
-    >
-      {t.cta}
-    </a>
+      <div
+        class="absolute inset-0 bg-pink-100 rounded-2xl transform translate-x-4 translate-y-4 lg:translate-x-6 lg:translate-y-6 -z-10"
+      >
+      </div>
+      <Image
+        src={heroImage}
+        alt="Trabajo de estética en Noelia Estética"
+        class="rounded-2xl shadow-xl object-cover w-full h-full absolute inset-0 brightness-105 contrast-105"
+      />
+    </div>
   </div>
 </section>

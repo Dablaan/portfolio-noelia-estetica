@@ -9,6 +9,8 @@
   --color-pastel-green: #ecfdf5;
   --color-pastel-green-dark: #a7f3d0;
 
+  --font-serif: "Playfair Display", serif;
+
   --animate-fade-in-up: fade-in-up 0.8s ease-out both;
 }
 

@@ -1,0 +1,111 @@
+---
+interface Props {
+    lang?: "es" | "en";
+}
+
+const { lang = "es" } = Astro.props;
+
+// Coordinates for Patraix, Valencia
+const mapUrl =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12320.088625539513!2d-0.4042854041773099!3d39.46313360699042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604f32e2ac18a5%3A0xe5a3c0e359a60e1d!2sPatraix%2C%20Valencia!5e0!3m2!1ses!2ses!4v1709665780516!5m2!1ses!2ses";
+
+const i18n = {
+    es: {
+        titlePart1: "En el corazón de",
+        titleHighlight: "Patraix",
+        description:
+            "Ubicado en uno de los barrios con más encanto y tranquilidad de Valencia. Mi estudio es un espacio privado diseñado exclusivamente para tu desconexión y confort. Sin ruidos, sin prisas, solo tú y tu momento de belleza.",
+        addressTitle: "Ubicación",
+        address: "Patraix, 46018 Valencia",
+        hoursTitle: "Horario",
+        hours: "Lunes a Viernes: Con cita previa",
+        appointmentOnly: "Exclusivamente con cita previa",
+    },
+    en: {
+        titlePart1: "In the heart of",
+        titleHighlight: "Patraix",
+        description:
+            "Located in one of the most charming and peaceful neighborhoods of Valencia. My studio is a private space designed exclusively for your disconnection and comfort. No noise, no rush, just you and your beauty moment.",
+        addressTitle: "Location",
+        address: "Patraix, 46018 Valencia",
+        hoursTitle: "Hours",
+        hours: "Monday to Friday: By appointment",
+        appointmentOnly: "Exclusively by appointment",
+    },
+};
+
+const t = i18n[lang];
+---
+
+<section
+    id="ubicacion"
+    class="bg-nude-50 py-16 px-6 lg:py-24 border-t border-nude-100"
+>
+    <div
+        class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+    >
+        <!-- Left Column: Text content -->
+        <div class="flex flex-col items-start text-left order-2 lg:order-1">
+            <h2
+                class="text-4xl lg:text-5xl font-bold text-zinc-800 mb-6 font-serif"
+            >
+                {t.titlePart1}
+                <span class="italic text-pink-500 font-light"
+                    >{t.titleHighlight}</span
+                >
+            </h2>
+
+            <p class="text-lg text-zinc-600 mb-8 leading-relaxed max-w-lg">
+                {t.description}
+            </p>
+
+            <div
+                class="bg-white/60 backdrop-blur-sm p-6 rounded-2xl border border-white shadow-sm w-full max-w-md"
+            >
+                <div class="mb-4">
+                    <h3
+                        class="text-sm font-bold uppercase tracking-wider text-pink-700 mb-1"
+                    >
+                        {t.addressTitle}
+                    </h3>
+                    <p class="text-zinc-800">{t.address}</p>
+                </div>
+
+                <div>
+                    <h3
+                        class="text-sm font-bold uppercase tracking-wider text-pink-700 mb-1"
+                    >
+                        {t.hoursTitle}
+                    </h3>
+                    <p class="text-zinc-800 mb-1">{t.hours}</p>
+                    <span
+                        class="inline-block text-xs font-semibold text-rose-600 bg-rose-50 px-2 py-1 rounded-md"
+                    >
+                        {t.appointmentOnly}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Map -->
+        <div
+            class="w-full h-[350px] lg:h-[450px] rounded-2xl overflow-hidden shadow-lg border-4 border-white order-1 lg:order-2 bg-nude-100 relative"
+        >
+            <div
+                class="absolute inset-0 flex items-center justify-center text-zinc-400 backdrop-blur-md bg-white/20 z-0"
+            >
+                Cargando mapa...
+            </div>
+            <iframe
+                src={mapUrl}
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                class="relative z-10 w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+            ></iframe>
+        </div>
+    </div>
+</section>
