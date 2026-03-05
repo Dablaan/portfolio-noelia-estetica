@@ -1,49 +1,45 @@
 ---
 interface Props {
-  lang?: 'es' | 'en';
+  lang?: "es" | "en";
 }
 
-const { lang = 'es' } = Astro.props;
+const { lang = "es" } = Astro.props;
 
 const i18n = {
   es: {
-    title: 'Síguenos en Instagram',
-    subtitle: '@noelia_estetica',
-    placeholderText: 'Aquí se cargará el feed de Instagram...'
+    title: "Mi día a día en el salón",
+    subtitle: "@nafnails_valencia",
   },
   en: {
-    title: 'Follow us on Instagram',
-    subtitle: '@noelia_estetica',
-    placeholderText: 'Instagram feed will load here...'
-  }
+    title: "My day-to-day at the salon",
+    subtitle: "@nafnails_valencia",
+  },
 };
 
 const t = i18n[lang];
-const instagramUrl = "https://www.instagram.com/noelia_estetica"; // Replace with actual handle if different
+const instagramUrl = "https://www.instagram.com/nafnails_valencia";
 ---
 
 <section class="bg-nude-50 py-16 px-6 lg:py-24 border-t border-nude-200">
   <div class="max-w-5xl mx-auto flex flex-col items-center">
-    <h2 class="text-3xl font-bold text-center text-zinc-800 mb-2">{t.title}</h2>
-    <a 
-      href={instagramUrl} 
-      target="_blank" 
-      rel="noopener noreferrer" 
+    <h2 class="text-3xl font-serif text-center text-zinc-800 mb-2">
+      {t.title}
+    </h2>
+    <a
+      href={instagramUrl}
+      target="_blank"
+      rel="noopener noreferrer"
       class="text-pink-600 font-medium hover:text-pink-700 transition-colors mb-12"
     >
       {t.subtitle}
     </a>
-    
-    <!-- Instagram Feed Placeholder -->
-    <!-- Integration note: This container is ready for an embedded widget (e.g. from Elfsight, Curator.io, or Meta API) -->
-    <div class="w-full max-w-4xl bg-white border border-nude-200 rounded-2xl shadow-sm h-96 flex items-center justify-center p-8 text-center text-zinc-400">
-      <div class="flex flex-col items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4 text-zinc-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
-        <p class="text-lg">{t.placeholderText}</p>
-      </div>
+
+    <!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+    <div
+      class="elfsight-app-1483e093-b0c9-44b1-a763-690f672554b6"
+      data-elfsight-app-lazy
+    >
     </div>
   </div>
 </section>
