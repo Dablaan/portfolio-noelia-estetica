@@ -1,8 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 import '../styles/global.css';
+
+// Get lang from URL search params or path, fallback to 'es' for now
+// In Astro, logic can get the current locale if configured, but we keep it simple 'es' as default
+const lang = 'es'; 
 ---
 
-<Layout>
-	<h1 class="text-3xl font-bold text-center mt-10">Bienvenido a Noelia Estética</h1>
+<Layout lang={lang}>
+	<main class="w-full flex-grow flex flex-col items-center overflow-x-hidden">
+		<Hero lang={lang} />
+		<Services lang={lang} />
+		<WhatsAppButton lang={lang} />
+	</main>
 </Layout>

@@ -1,0 +1,39 @@
+---
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+
+const i18n = {
+  es: {
+    title: 'Tu espacio digital como en casa',
+    subtitle: 'Ambiente tranquilo, trato súper personalizado. Nos encanta cuidar y mimar a cada cliente.',
+    cta: 'Reserva tu cita'
+  },
+  en: {
+    title: 'Your digital space, feels like home',
+    subtitle: 'Quiet environment, super personalized treatment. We love to care for and pamper every client.',
+    cta: 'Book your appointment'
+  }
+};
+
+const t = i18n[lang];
+---
+
+<section class="bg-nude-50 py-20 px-6 text-center lg:py-32 flex flex-col items-center justify-center min-h-[60vh]">
+  <div class="max-w-3xl mx-auto flex flex-col items-center">
+    <h1 class="text-4xl lg:text-5xl font-bold text-zinc-800 mb-6 leading-tight">
+      {t.title}
+    </h1>
+    <p class="text-lg lg:text-xl text-zinc-600 mb-10 max-w-2xl">
+      {t.subtitle}
+    </p>
+    <a 
+      href="#servicios" 
+      class="inline-block bg-pastel-pink-dark text-zinc-900 font-semibold px-8 py-3 rounded-full shadow-sm hover:shadow-md transition-shadow hover:bg-pastel-pink mb-4"
+    >
+      {t.cta}
+    </a>
+  </div>
+</section>

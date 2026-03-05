@@ -1,0 +1,64 @@
+---
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+
+const i18n = {
+  es: {
+    title: 'Nuestros Servicios Estrella',
+    highlightTitle: 'Microblading & Micropigmentación',
+    highlightDesc: 'Diseño experto de mirada y labios. Resultados naturales que realzan tu belleza.',
+    menuTitle: 'Estética Completa',
+    services: [
+      { name: 'Uñas Acrílicas', desc: 'extensiones, esculpidas y diseños únicos' },
+      { name: 'Esmalte Semipermanente', desc: 'color duradero y brillo impecable' },
+      { name: 'Pedicuras Spa', desc: 'relajación y cuidado para tus pies' }
+    ]
+  },
+  en: {
+    title: 'Our Star Services',
+    highlightTitle: 'Microblading & Micropigmentation',
+    highlightDesc: 'Expert eye and lip design. Natural results that enhance your beauty.',
+    menuTitle: 'Complete Aesthetics',
+    services: [
+      { name: 'Acrylic Nails', desc: 'extensions, sculpted and unique designs' },
+      { name: 'Semi-permanent Polish', desc: 'long-lasting color and flawless shine' },
+      { name: 'Spa Pedicures', desc: 'relaxation and care for your feet' }
+    ]
+  }
+};
+
+const t = i18n[lang];
+---
+
+<section id="servicios" class="bg-white py-16 px-6 lg:py-24">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-3xl font-bold text-center text-zinc-800 mb-12">{t.title}</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+      <!-- Highlight Services -->
+      <div class="bg-pastel-pink rounded-3xl p-8 shadow-sm flex flex-col justify-center border border-pink-100">
+        <h3 class="text-2xl font-bold text-zinc-800 mb-4">{t.highlightTitle}</h3>
+        <p class="text-zinc-700 leading-relaxed mb-6">
+          {t.highlightDesc}
+        </p>
+        <span class="inline-block self-start text-xs font-bold uppercase tracking-wider text-pink-600 bg-pink-100 px-3 py-1 rounded-full">Destacado</span>
+      </div>
+
+      <!-- General Menu -->
+      <div class="bg-pastel-green rounded-3xl p-8 shadow-sm border border-emerald-100">
+        <h3 class="text-2xl font-bold text-zinc-800 mb-6">{t.menuTitle}</h3>
+        <ul class="space-y-6">
+          {t.services.map((service) => (
+            <li class="flex flex-col">
+              <span class="text-lg font-semibold text-zinc-800">{service.name}</span>
+              <span class="text-zinc-600">{service.desc}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
