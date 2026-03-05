@@ -1,37 +1,48 @@
 ---
 interface Props {
-  lang?: 'es' | 'en';
+  lang?: "es" | "en";
 }
 
-const { lang = 'es' } = Astro.props;
+const { lang = "es" } = Astro.props;
 
 const i18n = {
   es: {
-    title: 'Despierta tu mejor versión en mi espacio diseñado para ti',
-    subtitle: 'Olvídate del estrés diario en mi refugio de estética. Déjate mimar por mí y luce unas manos, mirada y piel impecables durante semanas.',
-    cta: 'Reserva tu momento'
+    title: "Despierta tu mejor versión en mi espacio diseñado para ti",
+    subtitle:
+      "Olvídate del estrés diario en mi refugio de estética en Patraix (Valencia). Déjate mimar por mí y luce unas manos, mirada y piel impecables durante semanas.",
+    cta: "Reserva tu momento",
   },
   en: {
-    title: 'Awaken your best version in my space designed for you',
-    subtitle: 'Forget daily stress in my aesthetic refuge. Let yourself be pampered by me and show off flawless hands, eyes and skin for weeks.',
-    cta: 'Book your moment'
-  }
+    title: "Awaken your best version in my space designed for you",
+    subtitle:
+      "Forget daily stress in my aesthetic refuge in Patraix (Valencia). Let yourself be pampered by me and show off flawless hands, eyes and skin for weeks.",
+    cta: "Book your moment",
+  },
 };
 
 const t = i18n[lang];
 ---
 
-<section class="bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white via-nude-50 to-nude-100 py-20 px-6 text-center lg:py-32 flex flex-col items-center justify-center min-h-[60vh]">
+<section
+  class="bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-white via-nude-50 to-nude-100 py-20 px-6 text-center lg:py-32 flex flex-col items-center justify-center min-h-[60vh] grow"
+>
   <div class="max-w-3xl mx-auto flex flex-col items-center">
-    <h1 class="text-4xl lg:text-5xl font-bold text-zinc-800 mb-6 leading-tight tracking-tight animate-fade-in-up" style="animation-delay: 0.1s;">
+    <h1
+      class="text-4xl lg:text-5xl font-bold text-zinc-800 mb-6 leading-tight tracking-tight animate-fade-in-up"
+      style="animation-delay: 0.1s;"
+    >
       {t.title}
     </h1>
-    <p class="text-lg lg:text-xl text-zinc-600 mb-10 max-w-2xl animate-fade-in-up" style="animation-delay: 0.3s;">
+    <p
+      class="text-lg lg:text-xl text-zinc-600 mb-10 max-w-2xl animate-fade-in-up"
+      style="animation-delay: 0.3s;"
+    >
       {t.subtitle}
     </p>
-    <a 
-      href="#servicios" 
-      class="inline-block bg-pastel-pink-dark text-zinc-900 font-semibold px-8 py-3 rounded-full hover:bg-pastel-pink mb-4 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-pink-200/60 animate-fade-in-up" style="animation-delay: 0.5s;"
+    <a
+      href="#servicios"
+      class="inline-block bg-pastel-pink-dark text-gray-800 font-semibold px-8 py-3 rounded-full hover:bg-pink-300 mb-4 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-pink-200/60 animate-fade-in-up"
+      style="animation-delay: 0.5s;"
     >
       {t.cta}
     </a>

@@ -1,82 +1,120 @@
 ---
-import { Image } from 'astro:assets';
-import imgMicroblading from '../assets/images/microblading-cejas-antes-despues-1.jpeg';
-import imgUñas from '../assets/images/unas-manicura-nude-1.jpeg';
+import { Image } from "astro:assets";
+import imgMicroblading from "../assets/images/microblading-cejas-antes-despues-1.jpeg";
+import imgUñas from "../assets/images/unas-manicura-nude-1.jpeg";
 
 interface Props {
-  lang?: 'es' | 'en';
+  lang?: "es" | "en";
 }
 
-const { lang = 'es' } = Astro.props;
+const { lang = "es" } = Astro.props;
 
 const i18n = {
   es: {
-    title: 'Experiencias de Belleza que Transforman',
-    highlightTitle: 'Microblading & Micropigmentación',
-    highlightDesc: 'Despierta cada mañana con una mirada perfecta. Diseño tus cejas y labios con precisión milimétrica para un resultado tan natural que será tu secreto. Olvídate del maquillaje diario.',
-    menuTitle: 'Mimos de Pies a Cabeza',
+    title: "Experiencias de Belleza que Transforman",
+    highlightTitle: "Microblading & Micropigmentación",
+    highlightDesc:
+      "Despierta cada mañana con una mirada perfecta. Diseño tus cejas y labios con precisión milimétrica para un resultado tan natural que será tu secreto. Olvídate del maquillaje diario.",
+    menuTitle: "Mimos de Pies a Cabeza",
     services: [
-      { name: 'Uñas Acrílicas', desc: 'uñas largas, ultrarresistentes y con el diseño que siempre has soñado' },
-      { name: 'Esmalte Semipermanente', desc: 'brillo cristalino y color intacto durante semanas. Adiós a los retoques' },
-      { name: 'Pedicuras Spa', desc: 'un ritual de relajación profunda donde renuevo tus pies, dejándolos suaves' }
-    ]
+      {
+        name: "Uñas Acrílicas",
+        desc: "uñas largas, ultrarresistentes y con el diseño que siempre has soñado",
+      },
+      {
+        name: "Esmalte Semipermanente",
+        desc: "brillo cristalino y color intacto durante semanas. Adiós a los retoques",
+      },
+      {
+        name: "Pedicuras Spa",
+        desc: "un ritual de relajación profunda donde renuevo tus pies, dejándolos suaves",
+      },
+    ],
   },
   en: {
-    title: 'Transformative Beauty Experiences',
-    highlightTitle: 'Microblading & Micropigmentation',
-    highlightDesc: 'Wake up every morning with a perfect look. I design your eyebrows and lips with millimeter precision. Forget about daily makeup.',
-    menuTitle: 'Pampering from Head to Toe',
+    title: "Transformative Beauty Experiences",
+    highlightTitle: "Microblading & Micropigmentation",
+    highlightDesc:
+      "Wake up every morning with a perfect look. I design your eyebrows and lips with millimeter precision. Forget about daily makeup.",
+    menuTitle: "Pampering from Head to Toe",
     services: [
-      { name: 'Acrylic Nails', desc: 'long, ultra-resistant nails with the design you have always dreamed of' },
-      { name: 'Semi-permanent Polish', desc: 'crystalline shine and intact color for weeks. Goodbye to daily touch-ups' },
-      { name: 'Spa Pedicures', desc: 'a deep relaxation ritual where I renew your feet, leaving them soft' }
-    ]
-  }
+      {
+        name: "Acrylic Nails",
+        desc: "long, ultra-resistant nails with the design you have always dreamed of",
+      },
+      {
+        name: "Semi-permanent Polish",
+        desc: "crystalline shine and intact color for weeks. Goodbye to daily touch-ups",
+      },
+      {
+        name: "Spa Pedicures",
+        desc: "a deep relaxation ritual where I renew your feet, leaving them soft",
+      },
+    ],
+  },
 };
 
 const t = i18n[lang];
 ---
 
-<section id="servicios" class="bg-nude-50/50 py-16 px-6 lg:py-24 relative overflow-hidden">
+<section
+  id="servicios"
+  class="bg-nude-50/50 py-16 px-6 lg:py-24 relative overflow-hidden"
+>
   <div class="max-w-5xl mx-auto relative z-10">
-    <h2 class="text-3xl font-bold text-center text-zinc-800 mb-12">{t.title}</h2>
-    
+    <h2 class="text-3xl font-bold text-center text-zinc-800 mb-12">
+      {t.title}
+    </h2>
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
       <!-- Highlight Services -->
-      <div class="bg-white/80 backdrop-blur-md rounded-3xl p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col justify-between border border-white/60 group hover:-translate-y-2 transition-transform duration-300">
+      <div
+        class="bg-pastel-pink/30 backdrop-blur-sm rounded-3xl p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col justify-between border border-pastel-pink-dark/50 group hover:-translate-y-2 transition-transform duration-300"
+      >
         <div>
-          <h3 class="text-2xl font-bold text-zinc-800 mb-4">{t.highlightTitle}</h3>
+          <h3 class="text-2xl font-bold text-zinc-800 mb-4">
+            {t.highlightTitle}
+          </h3>
           <p class="text-zinc-700 leading-relaxed mb-6">
             {t.highlightDesc}
           </p>
-          <span class="inline-block self-start text-xs font-bold uppercase tracking-wider text-pink-700 bg-pink-50/80 border border-pink-200 px-3 py-1 rounded-full mb-6">Destacado</span>
+          <span
+            class="inline-block self-start text-xs font-bold uppercase tracking-wider text-pink-700 bg-pink-50/80 border border-pink-200 px-3 py-1 rounded-full mb-6"
+            >Destacado</span
+          >
         </div>
         <div class="overflow-hidden rounded-lg shadow-sm mt-4">
-          <Image 
-            src={imgMicroblading} 
-            alt="Trabajo de Microblading" 
+          <Image
+            src={imgMicroblading}
+            alt="Trabajo de Microblading"
             class="w-full aspect-square object-cover brightness-105 contrast-105 group-hover:scale-105 transition-transform duration-500"
           />
         </div>
       </div>
 
       <!-- General Menu -->
-      <div class="bg-white/80 backdrop-blur-md rounded-3xl p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 flex flex-col justify-between group hover:-translate-y-2 transition-transform duration-300">
+      <div
+        class="bg-pastel-green/30 backdrop-blur-sm rounded-3xl p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-pastel-green-dark/50 flex flex-col justify-between group hover:-translate-y-2 transition-transform duration-300"
+      >
         <div>
           <h3 class="text-2xl font-bold text-zinc-800 mb-6">{t.menuTitle}</h3>
           <ul class="space-y-6 mb-8">
-            {t.services.map((service) => (
-              <li class="flex flex-col">
-                <span class="text-lg font-semibold text-zinc-800">{service.name}</span>
-                <span class="text-zinc-600">{service.desc}</span>
-              </li>
-            ))}
+            {
+              t.services.map((service) => (
+                <li class="flex flex-col">
+                  <span class="text-lg font-semibold text-zinc-800">
+                    {service.name}
+                  </span>
+                  <span class="text-zinc-600">{service.desc}</span>
+                </li>
+              ))
+            }
           </ul>
         </div>
         <div class="overflow-hidden rounded-lg shadow-sm mt-auto">
-          <Image 
-            src={imgUñas} 
-            alt="Trabajo de Manicura Nude" 
+          <Image
+            src={imgUñas}
+            alt="Trabajo de Manicura Nude"
             class="w-full aspect-square object-cover brightness-105 contrast-105 group-hover:scale-105 transition-transform duration-500"
           />
         </div>

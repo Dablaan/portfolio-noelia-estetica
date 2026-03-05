@@ -1,0 +1,74 @@
+---
+import { Image } from "astro:assets";
+
+import imgUnasColor1 from "../assets/images/unas-manicura-divertida.jpeg";
+import imgUnasBlanca1 from "../assets/images/unas-acrilicas-blancas-1.jpeg";
+import imgUnasBlanca2 from "../assets/images/unas-acrilicas-blancas-2.jpeg";
+import imgUnasFrancesa1 from "../assets/images/unas-manicura-tematica-1.jpeg";
+import imgUnasFrancesa2 from "../assets/images/unas-manicura-tematica-2.jpeg";
+import imgUnasRojas from "../assets/images/unas-semipermanente-rojas.jpeg";
+
+import imgMb2 from "../assets/images/microblading-cejas-antes-despues-2.jpeg";
+import imgMb3 from "../assets/images/microblading-cejas-antes-despues-3.jpeg";
+import imgMb4 from "../assets/images/microblading-cejas-antes-despues-4.jpeg";
+import imgMb5 from "../assets/images/microblading-cejas-antes-despues-5.jpeg";
+
+interface Props {
+    lang?: "es" | "en";
+}
+
+const { lang = "es" } = Astro.props;
+
+const i18n = {
+    es: {
+        title: "Mis Trabajos",
+        subtitle: "Inspiración para tu próximo cambio",
+    },
+    en: {
+        title: "My Work",
+        subtitle: "Inspiration for your next change",
+    },
+};
+
+const t = i18n[lang];
+
+const images = [
+    { src: imgUnasBlanca1, alt: "Manicura uñas acrílicas blancas" },
+    { src: imgMb2, alt: "Microblading cejas antes y después" },
+    { src: imgUnasColor1, alt: "Manicura divertida con nail art" },
+    { src: imgMb3, alt: "Diseño de cejas microblading" },
+    { src: imgUnasFrancesa1, alt: "Manicura temática francesa" },
+    { src: imgMb4, alt: "Resultado micropigmentación cejas" },
+    { src: imgUnasBlanca2, alt: "Trabajo en uñas acrílicas" },
+    { src: imgMb5, alt: "Detalle cejas pelo a pelo" },
+    { src: imgUnasRojas, alt: "Esmalte semipermanente rojo vivo" },
+    { src: imgUnasFrancesa2, alt: "Manicura original" },
+];
+---
+
+<section id="galeria" class="bg-white py-16 px-6 lg:py-24">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-zinc-800 mb-4">{t.title}</h2>
+            <p class="text-zinc-600 text-lg">{t.subtitle}</p>
+        </div>
+
+        <div
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6"
+        >
+            {
+                images.map((img) => (
+                    <div class="overflow-hidden rounded-xl bg-nude-50 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                        <Image
+                            src={img.src}
+                            alt={img.alt}
+                            class="w-full h-auto object-cover aspect-square brightness-105 contrast-105"
+                            width={400}
+                            height={400}
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
