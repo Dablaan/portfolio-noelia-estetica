@@ -1,4 +1,8 @@
 ---
+import { Image } from 'astro:assets';
+import imgMicroblading from '../assets/images/microblading-cejas-antes-despues-1.jpeg';
+import imgUñas from '../assets/images/unas-manicura-nude-1.jpeg';
+
 interface Props {
   lang?: 'es' | 'en';
 }
@@ -39,25 +43,39 @@ const t = i18n[lang];
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
       <!-- Highlight Services -->
-      <div class="bg-pastel-pink rounded-3xl p-8 shadow-sm flex flex-col justify-center border border-pink-100">
-        <h3 class="text-2xl font-bold text-zinc-800 mb-4">{t.highlightTitle}</h3>
-        <p class="text-zinc-700 leading-relaxed mb-6">
-          {t.highlightDesc}
-        </p>
-        <span class="inline-block self-start text-xs font-bold uppercase tracking-wider text-pink-600 bg-pink-100 px-3 py-1 rounded-full">Destacado</span>
+      <div class="bg-pastel-pink rounded-3xl p-8 shadow-sm flex flex-col justify-between border border-pink-100">
+        <div>
+          <h3 class="text-2xl font-bold text-zinc-800 mb-4">{t.highlightTitle}</h3>
+          <p class="text-zinc-700 leading-relaxed mb-6">
+            {t.highlightDesc}
+          </p>
+          <span class="inline-block self-start text-xs font-bold uppercase tracking-wider text-pink-600 bg-pink-100 px-3 py-1 rounded-full mb-6">Destacado</span>
+        </div>
+        <Image 
+          src={imgMicroblading} 
+          alt="Trabajo de Microblading" 
+          class="w-full aspect-square object-cover rounded-lg shadow-sm brightness-105 contrast-105"
+        />
       </div>
 
       <!-- General Menu -->
-      <div class="bg-pastel-green rounded-3xl p-8 shadow-sm border border-emerald-100">
-        <h3 class="text-2xl font-bold text-zinc-800 mb-6">{t.menuTitle}</h3>
-        <ul class="space-y-6">
-          {t.services.map((service) => (
-            <li class="flex flex-col">
-              <span class="text-lg font-semibold text-zinc-800">{service.name}</span>
-              <span class="text-zinc-600">{service.desc}</span>
-            </li>
-          ))}
-        </ul>
+      <div class="bg-pastel-green rounded-3xl p-8 shadow-sm border border-emerald-100 flex flex-col justify-between">
+        <div>
+          <h3 class="text-2xl font-bold text-zinc-800 mb-6">{t.menuTitle}</h3>
+          <ul class="space-y-6 mb-8">
+            {t.services.map((service) => (
+              <li class="flex flex-col">
+                <span class="text-lg font-semibold text-zinc-800">{service.name}</span>
+                <span class="text-zinc-600">{service.desc}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <Image 
+          src={imgUñas} 
+          alt="Trabajo de Manicura Nude" 
+          class="w-full aspect-square object-cover rounded-lg shadow-sm brightness-105 contrast-105 mt-auto"
+        />
       </div>
     </div>
   </div>

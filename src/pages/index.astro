@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Services from '../components/Services.astro';
+import InstagramFeed from '../components/InstagramFeed.astro';
+import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import '../styles/global.css';
 
@@ -14,6 +16,8 @@ const lang = 'es';
 	<main class="w-full flex-grow flex flex-col items-center overflow-x-hidden">
 		<Hero lang={lang} />
 		<Services lang={lang} />
-		<WhatsAppButton lang={lang} />
+		<InstagramFeed lang={lang} />
 	</main>
+	<Footer lang={lang} />
+	<WhatsAppButton lang={lang} />
 </Layout>
