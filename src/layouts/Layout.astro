@@ -1,22 +1,29 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+	lang?: 'es' | 'en';
+}
+
+const { 
+	title = 'Noelia Estética', 
+	description = 'Especialista en estética: uñas acrílicas, esmalte semipermanente, pedicuras Spa y microblading. Trato totalmente personalizado.',
+	lang = 'es' 
+} = Astro.props;
+---
 <!doctype html>
-<html lang="es">
+<html lang={lang} class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Noelia Estética</title>
+		<title>{title}</title>
 	</head>
-	<body>
+	<body class="bg-nude-50 text-zinc-800 antialiased font-sans min-h-screen w-full flex flex-col">
 		<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

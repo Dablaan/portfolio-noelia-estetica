@@ -18,4 +18,4 @@ trigger: always_on
 - Escribir código modular: usar componentes de Astro (`.astro`) reutilizables.
 - Nada de APIs complejas (ej. Meta API). Para redes, usar enlaces directos o widgets embebidos simples.
 - Zona de contacto: Exclusivamente a través de un botón flotante/enlace directo a la API web de WhatsApp (`wa.me`).
-- Idioma del código y comentarios: Español.
+- Idioma de la interfaz: Bilingüe (Español como idioma principal, con opción de cambio a Inglés). El código y comentarios internos se mantienen en Español.

@@ -13,6 +13,7 @@
 * [cite_start]**Botón de Llamada a la Acción (CTA):** Botón flotante para enviar un WhatsApp con el mensaje: "Hola, estoy interesada en el servicio de..."[cite: 11].
 * [cite_start]**Acceso Telefónico:** Opción de llamada directa al número 687 43 25 00[cite: 12].
 * [cite_start]**Sección de Valor Diferencial:** Bloque de texto que resalte el "ambiente tranquilo", el "trato súper personalizado" y el "cuidar y mimar" a cada cliente[cite: 13, 14].
+* **Soporte Bilingüe (i18n):** Selector de idioma (ES/EN) accesible desde la navegación principal para adaptar todos los textos de la interfaz.
 
 ## 4. Requisitos No Funcionales
 * [cite_start]**Identidad Visual:** Uso de tonos rosas pastel y verdes[cite: 16].
