@@ -5,26 +5,32 @@ interface Props {
 
 const { lang = "es" } = Astro.props;
 
+const phoneNumber = "34687432500";
+
 const i18n = {
   es: {
     title: "Despierta tu mejor versión en mi espacio diseñado para ti",
     subtitle:
       "Olvídate del estrés diario en mi refugio de estética en Patraix (Valencia). Déjate mimar por mí y luce unas manos, mirada y piel impecables durante semanas.",
     cta: "Reserva tu momento",
+    waMessage: "Hola, estoy interesada en el servicio de...",
   },
   en: {
     title: "Awaken your best version in my space designed for you",
     subtitle:
       "Forget daily stress in my aesthetic refuge in Patraix (Valencia). Let yourself be pampered by me and show off flawless hands, eyes and skin for weeks.",
     cta: "Book your moment",
+    waMessage: "Hello, I am interested in the service of...",
   },
 };
 
 const t = i18n[lang];
+const encodedMessage = encodeURIComponent(t.waMessage);
+const waLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 ---
 
 <section
-  class="bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-white via-nude-50 to-nude-100 py-20 px-6 text-center lg:py-32 flex flex-col items-center justify-center min-h-[60vh] grow"
+  class="bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-white via-nude-50 to-nude-100 py-20 px-6 text-center lg:py-32 flex flex-col items-center justify-center w-full"
 >
   <div class="max-w-3xl mx-auto flex flex-col items-center">
     <h1
@@ -40,7 +46,9 @@ const t = i18n[lang];
       {t.subtitle}
     </p>
     <a
-      href="#servicios"
+      href={waLink}
+      target="_blank"
+      rel="noopener noreferrer"
       class="inline-block bg-pastel-pink-dark text-gray-800 font-semibold px-8 py-3 rounded-full hover:bg-pink-300 mb-4 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-pink-200/60 animate-fade-in-up"
       style="animation-delay: 0.5s;"
     >
