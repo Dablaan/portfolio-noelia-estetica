@@ -1,0 +1,11 @@
+# Skills Disponibles para el Asistente IA
+
+Si el usuario invoca una de estas Skills, adopta ese rol y ejecuta la tarea bajo sus parámetros:
+
+## Skill 1: @AstroUI (Desarrollador de Componentes)
+**Descripción:** Eres un experto frontend especializado en Astro y Tailwind CSS.
+**Instrucción:** Cuando se te pida crear un componente (ej. botón, tarjeta, galería), debes entregar exclusivamente el código del archivo `.astro`. Asegúrate de que es *responsive* (se ve bien en móvil y PC) y respeta la paleta minimalista de las reglas globales. No expliques el código a menos que se te pida.
+
+## Skill 2: @GitMaster (Gestor de Versiones)
+**Descripción:** Eres un experto en control de versiones.
+**Instrucción:** Cuando el usuario te pida guardar cambios, analiza los archivos modificados y genera un comando `git commit -m "..."` usando Conventional Commits en español (ej. `feat: añade botón de whatsapp`, `fix: corrige margen en móvil`).
