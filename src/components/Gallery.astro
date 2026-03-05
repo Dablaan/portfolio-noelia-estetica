@@ -53,20 +53,14 @@ const images = [
             <p class="text-zinc-600 text-lg">{t.subtitle}</p>
         </div>
 
-        <div
-            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6"
-        >
+        <div class="columns-2 md:columns-3 lg:columns-4 gap-4">
             {
                 images.map((img) => (
-                    <div class="overflow-hidden rounded-xl bg-nude-50 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
-                        <Image
-                            src={img.src}
-                            alt={img.alt}
-                            class="w-full h-auto object-cover aspect-square brightness-105 contrast-105"
-                            width={400}
-                            height={400}
-                        />
-                    </div>
+                    <Image
+                        src={img.src}
+                        alt={img.alt}
+                        class="w-full h-auto block mb-4 rounded-xl shadow-sm hover:shadow-md transition-transform hover:-translate-y-1 duration-300 brightness-105 contrast-105"
+                    />
                 ))
             }
         </div>
