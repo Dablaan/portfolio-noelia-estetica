@@ -20,3 +20,6 @@ description: Workflow de trabajo
 - [ ] **Fase 5: Despliegue**
   - Subir código a GitHub.
   - Conectar y desplegar en Vercel.
+- [ ] **Fase 6: Auditoría UI/UX y Copywriting**
+  - Analizar el impacto visual de los componentes actuales.
+  - Proponer mejoras en los textos para aumentar la conversión.
