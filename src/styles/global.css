@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════════
    global.css — Noelia Estética
-   Tailwind v4 · @theme tokens + utilidades custom
+   Tailwind v4 · tokens + clases custom completas
    ══════════════════════════════════════════════════ */
 
 @import "tailwindcss";
@@ -8,22 +8,252 @@
 /* ─── DESIGN TOKENS ─────────────────────────────── */
 @theme {
   /* Paleta warm-luxury */
-  --color-cream:          #F5F0E8;
-  --color-cream-dark:     #EDE5D5;
+  --color-cream:          #F7F2EA;
+  --color-light:          #FAF7F3;
+  --color-peach:          #F0E6DA;
+  --color-nude:           #C9A882;
+  --color-nude-dark:      #8B6442;
   --color-gold:           #C9A882;
   --color-gold-light:     #E8D5C0;
-  --color-gold-deep:      #8B6B4E;
+  --color-line:           #E8DDD0;
+  --color-muted:          #9A8878;
+  --color-dark:           #2C2416;
   --color-espresso:       #2C2416;
   --color-espresso-light: #6B5B4B;
 
   /* Tipografía */
   --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body:    "DM Sans", system-ui, sans-serif;
   --font-sans:    "DM Sans", system-ui, sans-serif;
 }
 
 /* ─── BASE ───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #FFFFFF;
+  color: var(--color-dark);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── TIPOGRAFÍA BASE ────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* ─── NAV ───────────────────────────────────────── */
+.nav-link {
+  font-size: 0.8375rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--color-dark);
+  text-decoration: none;
+  text-transform: uppercase;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+.nav-link:hover {
+  opacity: 1;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: var(--color-cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  transition: transform 0.4s ease;
+}
+.mobile-menu-link {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--color-dark);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+/* ─── SECTION LABEL ─────────────────────────────── */
+.section-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* ─── GOLD LINE ─────────────────────────────────── */
+.gold-line {
+  width: 2.5rem;
+  height: 1px;
+  background: var(--color-nude);
+}
+
+/* ─── BUTTONS ───────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: var(--color-dark);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--color-dark);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.btn-primary:hover {
+  background: var(--color-nude-dark);
+  border-color: var(--color-nude-dark);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: transparent;
+  color: var(--color-dark);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--color-dark);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.btn-ghost:hover {
+  background: var(--color-dark);
+  color: var(--color-cream);
+}
+
+/* ─── CARDS ─────────────────────────────────────── */
+.service-card {
+  background: var(--color-light);
+  padding: 2rem;
+  transition: transform 0.3s ease;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+}
+
+.testimonial-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-line);
+  padding: 2rem;
+}
+
+/* ─── IMAGE HOVER ───────────────────────────────── */
+.img-hover {
+  overflow: hidden;
+}
+.img-hover img {
+  transition: transform 0.6s ease;
+}
+.img-hover:hover img {
+  transform: scale(1.04);
+}
+
+/* ─── STARS ─────────────────────────────────────── */
+.stars {
+  color: var(--color-nude);
+  letter-spacing: 0.1em;
+}
+
+/* ─── SCROLL REVEAL ─────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ─── GALERÍA — filtro ───────────────────────────── */
+.gallery-item {
+  transition: opacity 0.32s ease, transform 0.32s ease;
+}
+.gallery-item.fading {
+  opacity: 0;
+  pointer-events: none;
+}
+.galeria-item {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.galeria-item.oculto {
+  display: none;
+}
+
+/* ─── BOTÓN FILTRO ───────────────────────────────── */
+.filter-btn {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--color-line);
+  background: transparent;
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--color-dark);
+  border-color: var(--color-dark);
+  color: var(--color-cream);
+}
+
+.btn-filtro {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.625rem 1.25rem;
+  border: 1px solid rgba(44,36,22,0.3);
+  color: var(--color-espresso-light);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background: transparent;
+}
+.btn-filtro.activo {
+  background: var(--color-espresso);
+  color: var(--color-cream);
+  border-color: var(--color-espresso);
 }
 
 /* ─── NAV — efecto scroll ────────────────────────── */
@@ -34,23 +264,10 @@ html {
 }
 #main-nav.nav-scrolled {
   background-color: var(--color-cream);
-  border-bottom-color: color-mix(in srgb, var(--color-gold) 30%, transparent);
+  border-bottom-color: rgba(201,168,130,0.3);
 }
 
-/* ─── GALERÍA — filtro ───────────────────────────── */
-.galeria-item {
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-.galeria-item.oculto {
-  display: none;
-}
-
-/* ─── BOTÓN FILTRO activo ────────────────────────── */
-.btn-filtro {
-  @apply text-[10px] tracking-[0.2em] uppercase px-5 py-2.5
-         border border-espresso/30 text-espresso-light
-         transition-all duration-200 cursor-pointer;
-}
-.btn-filtro.activo {
-  @apply bg-espresso text-cream border-espresso;
+/* ─── UTILIDADES EXTRAS ──────────────────────────── */
+.hover\:text-nude:hover {
+  color: var(--color-nude) !important;
 }
