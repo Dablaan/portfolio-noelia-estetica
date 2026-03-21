@@ -1,27 +1,56 @@
+/* ══════════════════════════════════════════════════
+   global.css — Noelia Estética
+   Tailwind v4 · @theme tokens + utilidades custom
+   ══════════════════════════════════════════════════ */
+
 @import "tailwindcss";
 
+/* ─── DESIGN TOKENS ─────────────────────────────── */
 @theme {
-  --color-nude-50: #faf8f5;
-  --color-nude-100: #f5f0e6;
-  --color-nude-200: #e8dcc8;
-  --color-pastel-pink: #fdf2f8;
-  --color-pastel-pink-dark: #fbcfe8;
-  --color-pastel-green: #ecfdf5;
-  --color-pastel-green-dark: #a7f3d0;
+  /* Paleta warm-luxury */
+  --color-cream:          #F5F0E8;
+  --color-cream-dark:     #EDE5D5;
+  --color-gold:           #C9A882;
+  --color-gold-light:     #E8D5C0;
+  --color-gold-deep:      #8B6B4E;
+  --color-espresso:       #2C2416;
+  --color-espresso-light: #6B5B4B;
 
-  --font-serif: "Playfair Display", serif;
-
-  --animate-fade-in-up: fade-in-up 0.8s ease-out both;
+  /* Tipografía */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans:    "DM Sans", system-ui, sans-serif;
 }
 
-@keyframes fade-in-up {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
+/* ─── BASE ───────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
 
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ─── NAV — efecto scroll ────────────────────────── */
+#main-nav {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+}
+#main-nav.nav-scrolled {
+  background-color: var(--color-cream);
+  border-bottom-color: color-mix(in srgb, var(--color-gold) 30%, transparent);
+}
+
+/* ─── GALERÍA — filtro ───────────────────────────── */
+.galeria-item {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.galeria-item.oculto {
+  display: none;
+}
+
+/* ─── BOTÓN FILTRO activo ────────────────────────── */
+.btn-filtro {
+  @apply text-[10px] tracking-[0.2em] uppercase px-5 py-2.5
+         border border-espresso/30 text-espresso-light
+         transition-all duration-200 cursor-pointer;
+}
+.btn-filtro.activo {
+  @apply bg-espresso text-cream border-espresso;
 }

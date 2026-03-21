@@ -1,38 +1,42 @@
 ---
-import "../styles/global.css";
+import '../styles/global.css';
 
 interface Props {
-	title?: string;
-	description?: string;
-	lang?: "es" | "en";
+  title?: string;
+  description?: string;
 }
 
 const {
-	title = "Noelia Estética",
-	description = "Especialista en estética: uñas acrílicas, esmalte semipermanente, pedicuras Spa y microblading. Trato totalmente personalizado.",
-	lang = "es",
+  title       = 'Noelia Estética | Microblading y Manicura en Valencia · Patraix',
+  description = 'Estudio privado de estética en Patraix, Valencia. Microblading, manicura acrílica y pedicura spa con cita previa. Resultados naturales que duran semanas.',
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={lang} class="scroll-smooth">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content={description} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
-			rel="stylesheet"
-		/>
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body
-		class="bg-nude-50 text-zinc-800 antialiased font-sans min-h-screen w-full flex flex-col"
-	>
-		<slot />
-	</body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="keywords" content="microblading Valencia, estética Patraix Valencia, manicura Valencia, micropigmentación cejas Valencia, uñas acrílicas Valencia, pedicura spa Valencia" />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type"        content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+  <slot />
+</body>
 </html>

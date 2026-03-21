@@ -1,27 +1,693 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
-import Services from "../components/Services.astro";
-import Location from "../components/Location.astro";
-import Gallery from "../components/Gallery.astro";
-import InstagramFeed from "../components/InstagramFeed.astro";
-import Footer from "../components/Footer.astro";
-import WhatsAppButton from "../components/WhatsAppButton.astro";
-import "../styles/global.css";
+// src/pages/index.astro
+// Noelia Estética — Rediseño completo · Turia Digital 2026
+import Layout from '../layouts/Layout.astro';
 
-// Get lang from URL search params or path, fallback to 'es' for now
-// In Astro, logic can get the current locale if configured, but we keep it simple 'es' as default
-const lang = "es";
+const WA_NUM = "34687432500";
+const wa = (msg: string) =>
+  `https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`;
+
+const IMG = "https://portfolio-noelia-estetica.vercel.app/_astro";
+
+const services = [
+  {
+    num: "01",
+    name: "Microblading & Micropigmentación",
+    tag: "Más solicitado",
+    desc: "Cejas definidas pelo a pelo con resultado tan natural que será tu secreto. Incluye consulta de forma y tono, sesión y retoque a las 4–6 semanas.",
+    detail: "Micropigmentación de labios y eyeliner también disponibles.",
+    price: "Desde 120 €",
+    duration: "2 – 3 h",
+    waMsg: "Hola Noelia, me gustaría información sobre el microblading y reservar una cita.",
+    img: `${IMG}/microblading-cejas-antes-despues-1._-Z8ka6N_Z2e4ron.webp`,
+  },
+  {
+    num: "02",
+    name: "Manicura & Uñas",
+    tag: null,
+    desc: "Desde el esmalte semipermanente que dura semanas hasta uñas acrílicas con el diseño que siempre soñaste, sin sacrificar la salud de tu uña natural.",
+    detail: "Nail art y diseños personalizados disponibles.",
+    price: "Desde 25 €",
+    duration: "45 min – 2 h",
+    waMsg: "Hola Noelia, me gustaría reservar una cita para manicura.",
+    img: `${IMG}/unas-manicura-nude-1.DLU3zJn2_1DRQf9.webp`,
+  },
+  {
+    num: "03",
+    name: "Pedicura Spa",
+    tag: null,
+    desc: "Un ritual completo de relajación: exfoliación, hidratación profunda y esmalte. Sal caminando sobre nubes con unos pies completamente renovados.",
+    detail: "Pedicura francesa y diseños especiales disponibles.",
+    price: "Desde 30 €",
+    duration: "60 – 90 min",
+    waMsg: "Hola Noelia, me gustaría reservar una cita para pedicura spa.",
+    img: `${IMG}/unas-acrilicas-blancas-1.CA81tXP5_AJoyx.webp`,
+  },
+];
+
+const steps = [
+  { num: "01", title: "Reserva por WhatsApp", desc: "Cuéntame qué buscas. Confirmo tu cita en menos de 24 horas." },
+  { num: "02", title: "Consulta personalizada", desc: "Antes de empezar, diseñamos juntas el resultado que quieres conseguir." },
+  { num: "03", title: "Tu tratamiento", desc: "En mi estudio privado, sin ruidos ni prisas. Solo tú y tu momento." },
+  { num: "04", title: "Resultado que dura", desc: "Saldrás con cuidados por escrito. Escríbeme cualquier duda después." },
+];
+
+const gallery = [
+  { src: `${IMG}/microblading-cejas-antes-despues-2.CunYCRoY_Z1MiIMM.webp`, alt: "Microblading cejas antes y después", cat: "microblading" },
+  { src: `${IMG}/unas-acrilicas-blancas-1.CA81tXP5_AJoyx.webp`,             alt: "Uñas acrílicas blancas",            cat: "unas" },
+  { src: `${IMG}/microblading-cejas-antes-despues-3.C47s5Xpm_ZCGsHq.webp`, alt: "Diseño de cejas micropigmentadas",   cat: "microblading" },
+  { src: `${IMG}/unas-manicura-divertida.CfLeIgbY_HGzbv.webp`,              alt: "Nail art manicura creativa",         cat: "unas" },
+  { src: `${IMG}/microblading-cejas-antes-despues-4.Bp3zdeSF_ZKK2vF.webp`, alt: "Cejas pelo a pelo resultado",        cat: "microblading" },
+  { src: `${IMG}/unas-manicura-tematica-1.CqKo3e3U_ep9Ix.webp`,            alt: "Manicura temática francesa",         cat: "unas" },
+  { src: `${IMG}/microblading-cejas-antes-despues-5.Cnehf8s-_ZCPs2D.webp`, alt: "Detalle microblading natural",       cat: "microblading" },
+  { src: `${IMG}/unas-semipermanente-rojas.ChxAbl2__2mjDP1.webp`,           alt: "Esmalte semipermanente rojo vivo",   cat: "unas" },
+  { src: `${IMG}/microblading-cejas-antes-despues-1._-Z8ka6N_Z2e4ron.webp`,alt: "Micropigmentación cejas completa",   cat: "microblading" },
+  { src: `${IMG}/unas-acrilicas-blancas-2.ytZELzY2_Z1zVi2z.webp`,          alt: "Uñas acrílicas diseño",             cat: "unas" },
+  { src: `${IMG}/unas-manicura-nude-1.DLU3zJn2_1DRQf9.webp`,               alt: "Manicura nude delicada",            cat: "unas" },
+  { src: `${IMG}/unas-manicura-tematica-2.BxkZPR5w_ZCHrN8.webp`,           alt: "Manicura original artística",       cat: "unas" },
+];
+
+const testimonials = [
+  {
+    name: "Laura M.",
+    service: "Microblading",
+    text: "Llevaba años con complejo de mis cejas. Noelia las transformó por completo — el resultado es tan natural que nadie sabe que llevo microblading. 100% recomendable.",
+  },
+  {
+    name: "Sara R.",
+    service: "Manicura acrílica",
+    text: "Llevo 8 meses yendo con Noelia y no cambiaría. Atenta, profesional y con un ojo para el diseño que no he encontrado en ningún otro sitio en Valencia.",
+  },
+  {
+    name: "Cristina V.",
+    service: "Pedicura Spa",
+    text: "La pedicura fue una experiencia increíble. Me olvidé del mundo durante hora y media. Mis pies salieron como nuevos. Ya tengo la próxima cita reservada.",
+  },
+];
 ---
 
-<Layout lang={lang}>
-	<main class="w-full flex-grow flex flex-col items-center overflow-x-hidden">
-		<Hero lang={lang} />
-		<Services lang={lang} />
-		<Location lang={lang} />
-		<Gallery lang={lang} />
-		<InstagramFeed lang={lang} />
-	</main>
-	<Footer lang={lang} />
-	<WhatsAppButton lang={lang} />
+<Layout>
+
+  <!-- ═══════════════════════════════════════════════════ NAV -->
+  <nav id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300" style="padding: 1.5rem 0;">
+    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#inicio" class="flex flex-col" style="text-decoration:none;">
+        <span style="font-family:var(--font-display);font-size:1.35rem;font-weight:400;letter-spacing:0.05em;color:var(--color-dark);line-height:1;">
+          Noelia
+        </span>
+        <span class="section-label" style="letter-spacing:0.2em;">Estética</span>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#sobre-mi"    class="nav-link">Sobre mí</a>
+        <a href="#servicios"   class="nav-link">Servicios</a>
+        <a href="#galeria"     class="nav-link">Galería</a>
+        <a href="#contacto"    class="nav-link">Contacto</a>
+        <a href={wa("Hola Noelia, me gustaría reservar una cita.")} target="_blank" class="btn-primary" style="padding:0.6rem 1.25rem;font-size:0.75rem;">
+          Reservar cita
+        </a>
+      </div>
+
+      <!-- Mobile burger -->
+      <button id="menu-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Abrir menú">
+        <span class="menu-bar" style="display:block;width:22px;height:1.5px;background:var(--color-dark);transition:all 0.3s ease;"></span>
+        <span class="menu-bar" style="display:block;width:16px;height:1.5px;background:var(--color-dark);transition:all 0.3s ease;"></span>
+        <span class="menu-bar" style="display:block;width:22px;height:1.5px;background:var(--color-dark);transition:all 0.3s ease;"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div id="mobile-menu" class="mobile-menu">
+    <a href="#sobre-mi"  class="mobile-menu-link" data-menu-close>Sobre mí</a>
+    <a href="#servicios" class="mobile-menu-link" data-menu-close>Servicios</a>
+    <a href="#galeria"   class="mobile-menu-link" data-menu-close>Galería</a>
+    <a href="#contacto"  class="mobile-menu-link" data-menu-close>Contacto</a>
+    <a href={wa("Hola Noelia, me gustaría reservar una cita.")} target="_blank" class="btn-primary mt-4">
+      Reservar cita
+    </a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ HERO -->
+  <section id="inicio" class="min-h-screen grid md:grid-cols-2">
+    <!-- Left: text -->
+    <div class="flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-32 pb-16 md:pt-0">
+      <div class="reveal">
+        <span class="section-label">Estética · Patraix · Valencia</span>
+        <div class="gold-line mt-3 mb-8"></div>
+      </div>
+
+      <h1 class="reveal reveal-delay-1" style="font-family:var(--font-display);font-size:clamp(3rem,6vw,5rem);font-weight:300;line-height:1.1;letter-spacing:-0.01em;margin-bottom:1.75rem;">
+        Cejas perfectas.<br/>
+        <em style="font-style:italic;font-weight:300;">Uñas impecables.</em><br/>
+        Tu momento.
+      </h1>
+
+      <p class="reveal reveal-delay-2" style="font-size:1rem;line-height:1.75;color:var(--color-muted);max-width:40ch;margin-bottom:2.5rem;">
+        Estudio privado en el corazón de Patraix. Solo cita previa, sin prisas.
+        Microblading, manicura y pedicura con resultados que duran semanas.
+      </p>
+
+      <div class="reveal reveal-delay-3 flex flex-wrap gap-4">
+        <a href={wa("Hola Noelia, me gustaría reservar una cita.")} target="_blank" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.533 5.857L.057 23.882l6.198-1.625A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.814 9.814 0 01-5.006-1.374l-.36-.213-3.681.965.982-3.594-.234-.369A9.823 9.823 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/></svg>
+          Reservar cita
+        </a>
+        <a href="#servicios" class="btn-ghost">Ver servicios</a>
+      </div>
+
+      <!-- Social proof tiny -->
+      <div class="reveal reveal-delay-4 mt-12 flex items-center gap-4" style="border-top:1px solid var(--color-line);padding-top:1.5rem;">
+        <div>
+          <div style="font-family:var(--font-display);font-size:2rem;font-weight:400;line-height:1;">★★★★★</div>
+          <div style="font-size:0.75rem;color:var(--color-muted);margin-top:0.25rem;">Solo cita previa · Patraix, Valencia</div>
+        </div>
+        <div style="width:1px;height:2.5rem;background:var(--color-line);"></div>
+        <div style="font-size:0.8125rem;color:var(--color-muted);line-height:1.5;">Instagram<br/><a href="https://www.instagram.com/nafnails_valencia" target="_blank" style="color:var(--color-nude-dark);text-decoration:none;font-weight:500;">@nafnails_valencia</a></div>
+      </div>
+    </div>
+
+    <!-- Right: hero image -->
+    <div class="hidden md:block relative" style="background:var(--color-peach);">
+      <img
+        src={`${IMG}/microblading-cejas-antes-despues-2.CunYCRoY_Z1MiIMM.webp`}
+        alt="Resultado microblading cejas en Valencia — Noelia Estética"
+        class="w-full h-full object-cover"
+        loading="eager"
+        style="position:absolute;inset:0;"
+      />
+      <!-- Subtle overlay -->
+      <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(247,242,234,0.15),transparent);"></div>
+      <!-- Corner badge -->
+      <div class="reveal reveal-delay-2 absolute bottom-10 left-10" style="background:var(--color-cream);padding:1.25rem 1.5rem;max-width:16rem;">
+        <div class="section-label mb-2">Resultado real</div>
+        <p style="font-family:var(--font-display);font-size:1.1rem;font-weight:400;line-height:1.3;color:var(--color-dark);">Microblading pelo a pelo. Sin filtros.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ SOBRE MÍ -->
+  <section id="sobre-mi" style="padding:7rem 0;background:var(--color-light);">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+      <!-- Image -->
+      <div class="reveal img-hover relative order-2 md:order-1">
+        <img
+          src={`${IMG}/unas-manicura-nude-1.DLU3zJn2_1DRQf9.webp`}
+          alt="Noelia trabajando en su estudio de Patraix"
+          class="w-full"
+          style="aspect-ratio:4/5;object-fit:cover;"
+          loading="lazy"
+        />
+        <!-- Decorative border offset -->
+        <div style="position:absolute;inset:-12px;border:1px solid var(--color-nude);z-index:-1;pointer-events:none;"></div>
+      </div>
+
+      <!-- Text -->
+      <div class="order-1 md:order-2">
+        <div class="reveal">
+          <span class="section-label">Sobre mí</span>
+          <div class="gold-line mt-3 mb-8"></div>
+        </div>
+
+        <h2 class="reveal reveal-delay-1" style="font-family:var(--font-display);font-size:clamp(2.25rem,4vw,3.25rem);font-weight:300;line-height:1.15;margin-bottom:1.75rem;">
+          Soy Noelia.<br/>
+          <em>Tu espacio de<br/>belleza en Patraix.</em>
+        </h2>
+
+        <p class="reveal reveal-delay-2" style="font-size:0.9375rem;line-height:1.85;color:var(--color-muted);margin-bottom:1.25rem;">
+          Llevo años ayudando a mujeres de Valencia a sentirse bien con su piel, sus cejas y sus manos.
+          Mi estudio en Patraix es un espacio solo para ti: privado, tranquilo, sin prisas.
+        </p>
+        <p class="reveal reveal-delay-3" style="font-size:0.9375rem;line-height:1.85;color:var(--color-muted);margin-bottom:2.5rem;">
+          Trabajo exclusivamente con cita previa porque cada cliente se merece mi atención completa.
+          Solo necesitas venir con ganas de mimarte. Yo me encargo del resto.
+        </p>
+
+        <!-- Stats -->
+        <div class="reveal reveal-delay-4 grid grid-cols-3 gap-6 mb-8" style="border-top:1px solid var(--color-line);padding-top:2rem;">
+          <div>
+            <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:400;line-height:1;color:var(--color-nude-dark);">5+</div>
+            <div style="font-size:0.75rem;color:var(--color-muted);margin-top:0.25rem;letter-spacing:0.05em;">Años de<br/>experiencia</div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:400;line-height:1;color:var(--color-nude-dark);">300+</div>
+            <div style="font-size:0.75rem;color:var(--color-muted);margin-top:0.25rem;letter-spacing:0.05em;">Clientes<br/>satisfechas</div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:400;line-height:1;color:var(--color-nude-dark);">★ 5.0</div>
+            <div style="font-size:0.75rem;color:var(--color-muted);margin-top:0.25rem;letter-spacing:0.05em;">Valoración<br/>media</div>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-5">
+          <a href={wa("Hola Noelia, me gustaría conocer más sobre tus servicios.")} target="_blank" class="btn-ghost">
+            Escríbeme →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ SERVICIOS -->
+  <section id="servicios" style="padding:7rem 0;">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal text-center mb-16">
+        <span class="section-label">Servicios</span>
+        <div class="gold-line mx-auto mt-3 mb-6"></div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.2;">
+          Experiencias de belleza<br/><em>que transforman</em>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {services.map((s, i) => (
+          <div class={`service-card reveal reveal-delay-${i + 1}`}>
+            <!-- Number + tag -->
+            <div class="flex items-start justify-between mb-6">
+              <span style="font-family:var(--font-display);font-size:3.5rem;font-weight:300;line-height:1;color:var(--color-line);">{s.num}</span>
+              {s.tag && (
+                <span style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;background:var(--color-peach);color:var(--color-nude-dark);padding:0.25rem 0.625rem;font-weight:500;">
+                  {s.tag}
+                </span>
+              )}
+            </div>
+
+            <!-- Image -->
+            <div class="img-hover mb-6" style="aspect-ratio:4/3;overflow:hidden;">
+              <img src={s.img} alt={s.name} class="w-full h-full object-cover" loading="lazy" />
+            </div>
+
+            <!-- Content -->
+            <h3 style="font-family:var(--font-display);font-size:1.375rem;font-weight:400;margin-bottom:0.75rem;line-height:1.3;">{s.name}</h3>
+            <p style="font-size:0.875rem;line-height:1.75;color:var(--color-muted);margin-bottom:0.5rem;">{s.desc}</p>
+            <p style="font-size:0.8rem;color:var(--color-nude-dark);margin-bottom:1.5rem;font-style:italic;">{s.detail}</p>
+
+            <!-- Price + duration -->
+            <div class="flex items-center justify-between mb-6" style="padding:0.875rem 0;border-top:1px solid var(--color-line);border-bottom:1px solid var(--color-line);">
+              <div>
+                <div style="font-family:var(--font-display);font-size:1.5rem;font-weight:500;">{s.price}</div>
+                <div style="font-size:0.7rem;color:var(--color-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.1rem;">Precio orientativo</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:0.875rem;font-weight:500;color:var(--color-dark);">{s.duration}</div>
+                <div style="font-size:0.7rem;color:var(--color-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.1rem;">Duración</div>
+              </div>
+            </div>
+
+            <a href={wa(s.waMsg)} target="_blank" class="btn-primary w-full justify-center" style="width:100%;">
+              Reservar →
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <!-- Extra services note -->
+      <div class="reveal mt-10 text-center" style="padding:1.5rem;border:1px solid var(--color-line);">
+        <p style="font-size:0.875rem;color:var(--color-muted);">
+          ¿Buscas algo diferente? Escríbeme y buscamos la opción perfecta para ti.
+          <a href={wa("Hola Noelia, tengo una consulta sobre tus servicios.")} target="_blank" style="color:var(--color-nude-dark);text-decoration:none;font-weight:500;margin-left:0.25rem;">Consultar →</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ PROCESO -->
+  <section style="padding:7rem 0;background:var(--color-dark);">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal text-center mb-16">
+        <span class="section-label" style="color:var(--color-nude);">Cómo funciona</span>
+        <div class="gold-line mx-auto mt-3 mb-6"></div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.2;color:var(--color-cream);">
+          Tu cita, paso a paso
+        </h2>
+      </div>
+
+      <div class="flex flex-col md:flex-row items-start md:items-start gap-0">
+        {steps.map((step, i) => (
+          <div class="flex flex-col md:flex-col flex-1" style="position:relative;">
+            <!-- Connecting line on desktop -->
+            {i < steps.length - 1 && (
+              <div class="hidden md:block" style="position:absolute;top:2rem;left:calc(50% + 2rem);width:calc(100% - 4rem);height:1px;background:rgba(201,168,130,0.25);"></div>
+            )}
+
+            <div class={`reveal reveal-delay-${i + 1} flex flex-row md:flex-col gap-6 md:gap-0 items-start md:items-center pb-10 md:pb-0`}>
+              <!-- Number circle -->
+              <div style="width:4rem;height:4rem;border:1px solid var(--color-nude);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-bottom:0;margin-right:0;">
+                <span style="font-family:var(--font-display);font-size:1.125rem;font-weight:400;color:var(--color-nude);letter-spacing:0.05em;">{step.num}</span>
+              </div>
+
+              <div class="md:text-center" style="padding-top:0.25rem;flex:1;">
+                <div class="hidden md:block" style="height:2.5rem;"></div>
+                <h3 style="font-family:var(--font-display);font-size:1.25rem;font-weight:400;color:var(--color-cream);margin-bottom:0.625rem;line-height:1.3;">{step.title}</h3>
+                <p style="font-size:0.875rem;line-height:1.75;color:rgba(247,242,234,0.55);">{step.desc}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="reveal mt-16 text-center">
+        <a href={wa("Hola Noelia, me gustaría reservar una cita.")} target="_blank" class="btn-primary" style="background:var(--color-nude);color:var(--color-dark);">
+          Empezar ahora →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ TESTIMONIOS -->
+  <section style="padding:7rem 0;background:var(--color-light);">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal text-center mb-16">
+        <span class="section-label">Testimonios</span>
+        <div class="gold-line mx-auto mt-3 mb-6"></div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.2;">
+          Lo que dicen<br/><em>mis clientas</em>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {testimonials.map((t, i) => (
+          <div class={`testimonial-card reveal reveal-delay-${i + 1}`}>
+            <div class="stars mb-4" style="font-size:0.9rem;">★★★★★</div>
+            <p style="font-size:0.9375rem;line-height:1.8;color:var(--color-dark);margin-bottom:1.75rem;font-style:italic;">
+              "{t.text}"
+            </p>
+            <div style="border-top:1px solid var(--color-line);padding-top:1.25rem;display:flex;align-items:center;gap:0.75rem;">
+              <div style="width:2.25rem;height:2.25rem;border-radius:50%;background:var(--color-peach);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1rem;color:var(--color-nude-dark);font-weight:400;">
+                {t.name[0]}
+              </div>
+              <div>
+                <div style="font-weight:500;font-size:0.875rem;">{t.name}</div>
+                <div style="font-size:0.75rem;color:var(--color-muted);">{t.service}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Google reviews CTA -->
+      <div class="reveal mt-10 text-center">
+        <p style="font-size:0.875rem;color:var(--color-muted);">¿Eres clienta? Tu opinión ayuda a otras mujeres a decidir.</p>
+        <a href="https://g.page/r/review" target="_blank" style="display:inline-block;margin-top:0.5rem;font-size:0.8125rem;font-weight:500;color:var(--color-nude-dark);text-decoration:none;border-bottom:1px solid var(--color-nude);">
+          Dejar reseña en Google →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ GALERÍA -->
+  <section id="galeria" style="padding:7rem 0;">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal text-center mb-10">
+        <span class="section-label">Galería</span>
+        <div class="gold-line mx-auto mt-3 mb-6"></div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.2;">
+          Mis trabajos.<br/><em>Tu próxima inspiración.</em>
+        </h2>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="reveal flex justify-center gap-3 flex-wrap mb-10">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="microblading">Microblading & Cejas</button>
+        <button class="filter-btn" data-filter="unas">Manicura & Uñas</button>
+      </div>
+
+      <!-- Grid -->
+      <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        {gallery.map((item) => (
+          <div class="gallery-item img-hover" data-cat={item.cat} style="aspect-ratio:1/1;overflow:hidden;">
+            <img
+              src={item.src}
+              alt={item.alt}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+
+      <!-- Instagram CTA -->
+      <div class="reveal mt-12 text-center" style="padding:2rem;border:1px solid var(--color-line);">
+        <p style="font-family:var(--font-display);font-size:1.25rem;font-weight:300;margin-bottom:0.5rem;">Más trabajos en Instagram</p>
+        <a href="https://www.instagram.com/nafnails_valencia" target="_blank" style="color:var(--color-nude-dark);font-weight:500;text-decoration:none;font-size:0.9rem;letter-spacing:0.05em;">
+          @nafnails_valencia →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ CONTACTO -->
+  <section id="contacto" style="padding:7rem 0;background:var(--color-light);">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal text-center mb-16">
+        <span class="section-label">Contacto</span>
+        <div class="gold-line mx-auto mt-3 mb-6"></div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.2;">
+          En el corazón<br/><em>de Patraix</em>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <!-- Info -->
+        <div>
+          <div class="reveal" style="margin-bottom:2rem;">
+            <h3 style="font-family:var(--font-display);font-size:1.25rem;font-weight:400;margin-bottom:0.5rem;">📍 Ubicación</h3>
+            <p style="font-size:0.9375rem;color:var(--color-muted);line-height:1.7;">Patraix, 46018 Valencia<br/>Barrio tranquilo, fácil aparcamiento</p>
+          </div>
+
+          <div class="reveal reveal-delay-1" style="margin-bottom:2rem;">
+            <h3 style="font-family:var(--font-display);font-size:1.25rem;font-weight:400;margin-bottom:0.5rem;">🕐 Horario</h3>
+            <p style="font-size:0.9375rem;color:var(--color-muted);line-height:1.7;">Lunes a Viernes<br/>Exclusivamente con <strong>cita previa</strong></p>
+          </div>
+
+          <div class="reveal reveal-delay-2" style="margin-bottom:2rem;">
+            <h3 style="font-family:var(--font-display);font-size:1.25rem;font-weight:400;margin-bottom:0.5rem;">📱 WhatsApp</h3>
+            <a href={wa("Hola Noelia, me gustaría reservar una cita.")} target="_blank" style="font-size:0.9375rem;color:var(--color-nude-dark);text-decoration:none;font-weight:500;">
+              +34 687 432 500
+            </a>
+          </div>
+
+          <div class="reveal reveal-delay-3" style="margin-bottom:2.5rem;">
+            <h3 style="font-family:var(--font-display);font-size:1.25rem;font-weight:400;margin-bottom:0.5rem;">💳 Pago</h3>
+            <p style="font-size:0.9375rem;color:var(--color-muted);">Efectivo y transferencia</p>
+          </div>
+
+          <div class="reveal reveal-delay-4 flex flex-col gap-3">
+            <a href={wa("Hola Noelia, me gustaría reservar una cita.")} target="_blank" class="btn-primary" style="justify-content:center;text-align:center;">
+              Reservar cita por WhatsApp
+            </a>
+            <a href="https://www.instagram.com/nafnails_valencia" target="_blank" class="btn-ghost" style="justify-content:center;text-align:center;">
+              Seguir en Instagram
+            </a>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="reveal reveal-delay-2">
+          <iframe
+            src="https://maps.google.com/maps?q=Patraix,Valencia,Spain&output=embed&z=14"
+            width="100%"
+            height="400"
+            style="border:1px solid var(--color-line);filter:saturate(0.8) sepia(0.15);"
+            loading="lazy"
+            allowfullscreen
+            title="Localización Noelia Estética — Patraix, Valencia"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ FOOTER -->
+  <footer style="background:var(--color-dark);padding:4rem 0 2rem;">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-3 gap-10 mb-10" style="border-bottom:1px solid rgba(201,168,130,0.2);padding-bottom:2.5rem;">
+        <!-- Brand -->
+        <div>
+          <div style="font-family:var(--font-display);font-size:1.75rem;font-weight:300;color:var(--color-cream);margin-bottom:0.5rem;">
+            Noelia <em>Estética</em>
+          </div>
+          <p style="font-size:0.85rem;color:rgba(247,242,234,0.5);line-height:1.75;max-width:24ch;">
+            Estudio privado de estética en Patraix, Valencia. Solo cita previa.
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <div class="section-label" style="color:var(--color-nude);margin-bottom:1rem;">Navegación</div>
+          <div class="flex flex-col gap-2">
+            {["Sobre mí", "Servicios", "Galería", "Contacto"].map(link => (
+              <a href={`#${link.toLowerCase().replace(" ", "-").replace("í", "i")}`} style="font-size:0.875rem;color:rgba(247,242,234,0.6);text-decoration:none;transition:color 0.2s;" class="hover:text-nude">
+                {link}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <div class="section-label" style="color:var(--color-nude);margin-bottom:1rem;">Contacto</div>
+          <div class="flex flex-col gap-2">
+            <a href={wa("Hola Noelia, me gustaría reservar una cita.")} target="_blank" style="font-size:0.875rem;color:rgba(247,242,234,0.6);text-decoration:none;">
+              WhatsApp: +34 687 432 500
+            </a>
+            <a href="https://www.instagram.com/nafnails_valencia" target="_blank" style="font-size:0.875rem;color:rgba(247,242,234,0.6);text-decoration:none;">
+              Instagram: @nafnails_valencia
+            </a>
+            <p style="font-size:0.875rem;color:rgba(247,242,234,0.6);">Patraix, 46018 Valencia</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <p style="font-size:0.75rem;color:rgba(247,242,234,0.35);">
+          © 2026 Noelia Estética. Todos los derechos reservados.
+        </p>
+        <div class="flex gap-6">
+          <a href="/aviso-legal"          style="font-size:0.75rem;color:rgba(247,242,234,0.35);text-decoration:none;">Aviso legal</a>
+          <a href="/privacidad"           style="font-size:0.75rem;color:rgba(247,242,234,0.35);text-decoration:none;">Privacidad</a>
+          <a href="/cookies"              style="font-size:0.75rem;color:rgba(247,242,234,0.35);text-decoration:none;">Cookies</a>
+        </div>
+        <p style="font-size:0.7rem;color:rgba(247,242,234,0.2);">
+          Web por <a href="https://turiadigital.es" style="color:rgba(201,168,130,0.5);text-decoration:none;">Turia Digital</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+<!-- ═══════════════════════════════════════════════════════ SCRIPTS -->
+<script>
+  // ── Sticky nav background
+  const navbar = document.getElementById('navbar') as HTMLElement;
+  const onScroll = () => {
+    if (window.scrollY > 80) {
+      navbar.style.background = 'rgba(247,242,234,0.95)';
+      navbar.style.backdropFilter = 'blur(12px)';
+      navbar.style.boxShadow = '0 1px 0 rgba(201,168,130,0.2)';
+      navbar.style.padding = '1rem 0';
+    } else {
+      navbar.style.background = 'transparent';
+      navbar.style.backdropFilter = '';
+      navbar.style.boxShadow = '';
+      navbar.style.padding = '1.5rem 0';
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ── Mobile menu
+  const menuBtn  = document.getElementById('menu-btn')  as HTMLButtonElement;
+  const mobileMenu = document.getElementById('mobile-menu') as HTMLElement;
+  const bars = document.querySelectorAll('.menu-bar') as NodeListOf<HTMLElement>;
+
+  let menuOpen = false;
+  menuBtn.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open', menuOpen);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    // Animate bars
+    if (menuOpen) {
+      bars[0].style.transform = 'translateY(7.5px) rotate(45deg)';
+      bars[1].style.opacity = '0';
+      bars[2].style.transform = 'translateY(-7.5px) rotate(-45deg)';
+      bars[2].style.width = '22px';
+    } else {
+      bars[0].style.transform = '';
+      bars[1].style.opacity = '';
+      bars[2].style.transform = '';
+      bars[2].style.width = '';
+    }
+  });
+
+  document.querySelectorAll('[data-menu-close]').forEach(el => {
+    el.addEventListener('click', () => {
+      menuOpen = false;
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+      bars[0].style.transform = '';
+      bars[1].style.opacity = '';
+      bars[2].style.transform = '';
+      bars[2].style.width = '';
+    });
+  });
+
+  // ── Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+  revealEls.forEach(el => io.observe(el));
+
+  // ── Gallery filter
+  const filterBtns = document.querySelectorAll('.filter-btn') as NodeListOf<HTMLButtonElement>;
+  const galleryItems = document.querySelectorAll('.gallery-item') as NodeListOf<HTMLElement>;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter as string;
+
+      // Update active button
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Filter items
+      galleryItems.forEach(item => {
+        const cat = item.dataset.cat as string;
+        const show = filter === 'all' || cat === filter;
+
+        if (!show) {
+          item.classList.add('fading');
+          setTimeout(() => {
+            if (item.classList.contains('fading')) {
+              item.style.display = 'none';
+            }
+          }, 320);
+        } else {
+          item.style.display = '';
+          item.classList.remove('fading');
+        }
+      });
+    });
+  });
+</script>
+
+<!-- ═══════════════════════════════════════════════════════ FILTER STYLES -->
+<style>
+  .filter-btn {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--color-line);
+    background: transparent;
+    color: var(--color-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-btn:hover,
+  .filter-btn.active {
+    background: var(--color-dark);
+    border-color: var(--color-dark);
+    color: var(--color-cream);
+  }
+  .hover\:text-nude:hover {
+    color: var(--color-nude) !important;
+  }
+</style>
 </Layout>
