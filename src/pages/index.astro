@@ -7,7 +7,9 @@ const WA_NUM = "34687432500";
 const wa = (msg: string) =>
   `https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`;
 
-const IMG = "https://portfolio-noelia-estetica.vercel.app/_astro";
+// Imágenes locales — deben estar en public/images/ del proyecto
+// Copia las imágenes desde src/assets/ del proyecto anterior a public/images/
+const I = (n: string) => `/images/${n}`;
 
 const services = [
   {
@@ -19,7 +21,7 @@ const services = [
     price: "Desde 120 €",
     duration: "2 – 3 h",
     waMsg: "Hola Noelia, me gustaría información sobre el microblading y reservar una cita.",
-    img: `${IMG}/microblading-cejas-antes-despues-1._-Z8ka6N_Z2e4ron.webp`,
+    img: I("microblading-cejas-antes-despues-1.jpeg"),
   },
   {
     num: "02",
@@ -30,7 +32,7 @@ const services = [
     price: "Desde 25 €",
     duration: "45 min – 2 h",
     waMsg: "Hola Noelia, me gustaría reservar una cita para manicura.",
-    img: `${IMG}/unas-manicura-nude-1.DLU3zJn2_1DRQf9.webp`,
+    img: I("unas-manicura-nude-1.jpeg"),
   },
   {
     num: "03",
@@ -41,7 +43,7 @@ const services = [
     price: "Desde 30 €",
     duration: "60 – 90 min",
     waMsg: "Hola Noelia, me gustaría reservar una cita para pedicura spa.",
-    img: `${IMG}/unas-acrilicas-blancas-1.CA81tXP5_AJoyx.webp`,
+    img: I("unas-acrilicas-blancas-1.jpeg"),
   },
 ];
 
@@ -53,18 +55,18 @@ const steps = [
 ];
 
 const gallery = [
-  { src: `${IMG}/microblading-cejas-antes-despues-2.CunYCRoY_Z1MiIMM.webp`, alt: "Microblading cejas antes y después", cat: "microblading" },
-  { src: `${IMG}/unas-acrilicas-blancas-1.CA81tXP5_AJoyx.webp`,             alt: "Uñas acrílicas blancas",            cat: "unas" },
-  { src: `${IMG}/microblading-cejas-antes-despues-3.C47s5Xpm_ZCGsHq.webp`, alt: "Diseño de cejas micropigmentadas",   cat: "microblading" },
-  { src: `${IMG}/unas-manicura-divertida.CfLeIgbY_HGzbv.webp`,              alt: "Nail art manicura creativa",         cat: "unas" },
-  { src: `${IMG}/microblading-cejas-antes-despues-4.Bp3zdeSF_ZKK2vF.webp`, alt: "Cejas pelo a pelo resultado",        cat: "microblading" },
-  { src: `${IMG}/unas-manicura-tematica-1.CqKo3e3U_ep9Ix.webp`,            alt: "Manicura temática francesa",         cat: "unas" },
-  { src: `${IMG}/microblading-cejas-antes-despues-5.Cnehf8s-_ZCPs2D.webp`, alt: "Detalle microblading natural",       cat: "microblading" },
-  { src: `${IMG}/unas-semipermanente-rojas.ChxAbl2__2mjDP1.webp`,           alt: "Esmalte semipermanente rojo vivo",   cat: "unas" },
-  { src: `${IMG}/microblading-cejas-antes-despues-1._-Z8ka6N_Z2e4ron.webp`,alt: "Micropigmentación cejas completa",   cat: "microblading" },
-  { src: `${IMG}/unas-acrilicas-blancas-2.ytZELzY2_Z1zVi2z.webp`,          alt: "Uñas acrílicas diseño",             cat: "unas" },
-  { src: `${IMG}/unas-manicura-nude-1.DLU3zJn2_1DRQf9.webp`,               alt: "Manicura nude delicada",            cat: "unas" },
-  { src: `${IMG}/unas-manicura-tematica-2.BxkZPR5w_ZCHrN8.webp`,           alt: "Manicura original artística",       cat: "unas" },
+  { src: I("microblading-cejas-antes-despues-2.jpeg"), alt: "Microblading cejas antes y después", cat: "microblading" },
+  { src: I("unas-acrilicas-blancas-1.jpeg"),           alt: "Uñas acrílicas blancas",             cat: "unas" },
+  { src: I("microblading-cejas-antes-despues-3.jpeg"), alt: "Diseño de cejas micropigmentadas",   cat: "microblading" },
+  { src: I("unas-manicura-divertida.jpeg"),             alt: "Nail art manicura creativa",          cat: "unas" },
+  { src: I("microblading-cejas-antes-despues-4.jpeg"), alt: "Cejas pelo a pelo resultado",        cat: "microblading" },
+  { src: I("unas-manicura-tematica-1.jpeg"),           alt: "Manicura temática francesa",          cat: "unas" },
+  { src: I("microblading-cejas-antes-despues-5.jpeg"), alt: "Detalle microblading natural",       cat: "microblading" },
+  { src: I("unas-semipermanente-rojas.jpeg"),           alt: "Esmalte semipermanente rojo vivo",   cat: "unas" },
+  { src: I("microblading-cejas-antes-despues-1.jpeg"), alt: "Micropigmentación cejas completa",   cat: "microblading" },
+  { src: I("unas-acrilicas-blancas-2.jpeg"),           alt: "Uñas acrílicas diseño",              cat: "unas" },
+  { src: I("unas-manicura-nude-1.jpeg"),               alt: "Manicura nude delicada",              cat: "unas" },
+  { src: I("unas-manicura-tematica-2.jpeg"),           alt: "Manicura original artística",         cat: "unas" },
 ];
 
 const testimonials = [
@@ -120,7 +122,7 @@ const testimonials = [
   </nav>
 
   <!-- Mobile menu overlay -->
-  <div id="mobile-menu" class="mobile-menu">
+  <div id="mobile-menu" class="mobile-menu" style="transform:translateY(-100%);">
     <a href="#sobre-mi"  class="mobile-menu-link" data-menu-close>Sobre mí</a>
     <a href="#servicios" class="mobile-menu-link" data-menu-close>Servicios</a>
     <a href="#galeria"   class="mobile-menu-link" data-menu-close>Galería</a>
@@ -172,7 +174,7 @@ const testimonials = [
     <!-- Right: hero image -->
     <div class="hidden md:block relative" style="background:var(--color-peach);">
       <img
-        src={`${IMG}/microblading-cejas-antes-despues-2.CunYCRoY_Z1MiIMM.webp`}
+        src={I("microblading-cejas-antes-despues-2.jpeg")}
         alt="Resultado microblading cejas en Valencia — Noelia Estética"
         class="w-full h-full object-cover"
         loading="eager"
@@ -194,7 +196,7 @@ const testimonials = [
       <!-- Image -->
       <div class="reveal img-hover relative order-2 md:order-1">
         <img
-          src={`${IMG}/unas-manicura-nude-1.DLU3zJn2_1DRQf9.webp`}
+          src={I("unas-manicura-nude-1.jpeg")}
           alt="Noelia trabajando en su estudio de Patraix"
           class="w-full"
           style="aspect-ratio:4/5;object-fit:cover;"
@@ -314,7 +316,7 @@ const testimonials = [
   </section>
 
   <!-- ═══════════════════════════════════════════════════ PROCESO -->
-  <section style="padding:7rem 0;background:var(--color-dark);">
+  <section style="padding:7rem 0;background:#2C2416;">
     <div class="max-w-6xl mx-auto px-6">
       <div class="reveal text-center mb-16">
         <span class="section-label" style="color:var(--color-nude);">Cómo funciona</span>
@@ -502,7 +504,7 @@ const testimonials = [
   </section>
 
   <!-- ═══════════════════════════════════════════════════ FOOTER -->
-  <footer style="background:var(--color-dark);padding:4rem 0 2rem;">
+  <footer style="background:#2C2416;padding:4rem 0 2rem;">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid md:grid-cols-3 gap-10 mb-10" style="border-bottom:1px solid rgba(201,168,130,0.2);padding-bottom:2.5rem;">
         <!-- Brand -->
@@ -589,15 +591,16 @@ const testimonials = [
   let menuOpen = false;
   menuBtn.addEventListener('click', () => {
     menuOpen = !menuOpen;
-    mobileMenu.classList.toggle('open', menuOpen);
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
-    // Animate bars
     if (menuOpen) {
+      mobileMenu.style.transform = 'translateY(0)';
+      document.body.style.overflow = 'hidden';
       bars[0].style.transform = 'translateY(7.5px) rotate(45deg)';
       bars[1].style.opacity = '0';
       bars[2].style.transform = 'translateY(-7.5px) rotate(-45deg)';
       bars[2].style.width = '22px';
     } else {
+      mobileMenu.style.transform = 'translateY(-100%)';
+      document.body.style.overflow = '';
       bars[0].style.transform = '';
       bars[1].style.opacity = '';
       bars[2].style.transform = '';
@@ -608,7 +611,7 @@ const testimonials = [
   document.querySelectorAll('[data-menu-close]').forEach(el => {
     el.addEventListener('click', () => {
       menuOpen = false;
-      mobileMenu.classList.remove('open');
+      mobileMenu.style.transform = 'translateY(-100%)';
       document.body.style.overflow = '';
       bars[0].style.transform = '';
       bars[1].style.opacity = '';
